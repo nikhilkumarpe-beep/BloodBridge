@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}403 Access Forbidden - Blood Bridge{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-container {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 0;
+    }
+    
+    .error-code {
+        font-size: 8rem;
+        font-weight: 800;
+        color: #e63946;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+    
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: #2b2d42;
+    }
+    
+    .error-message {
+        font-size: 1.25rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .error-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .btn-primary {
+        background-color: #e63946;
+        border-color: #e63946;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        background-color: #d62f3d;
+        border-color: #d62f3d;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+    }
+    
+    .btn-outline-primary {
+        color: #e63946;
+        border-color: #e63946;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #f8f9fa;
+        color: #d62f3d;
+        border-color: #d62f3d;
+        transform: translateY(-2px);
+    }
+    
+    .error-illustration {
+        max-width: 400px;
+        margin: 0 auto 2rem;
+    }
+    
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 6rem;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+        }
+        
+        .error-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .btn, .btn-outline-primary {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="error-code">403</div>
+                <h1 class="error-title">Access Forbidden</h1>
+                <div class="error-message">
+                    <p>You don't have permission to access this page. If you believe this is a mistake, please contact support.</p>
+                </div>
+                
+                <div class="error-illustration">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+                        <rect x="300" y="100" width="200" height="200" rx="20" fill="#F8F9FA" stroke="#E9ECEF" stroke-width="2"/>
+                        <rect x="350" y="70" width="100" height="30" rx="15" fill="#E9ECEF"/>
+                        <circle cx="400" cy="200" r="50" fill="#E9ECEF"/>
+                        <path d="M400 180C406.627 180 412 185.373 412 192C412 198.627 406.627 204 400 204C393.373 204 388 198.627 388 192C388 185.373 393.373 180 400 180Z" fill="#6C757D"/>
+                        <path d="M400 210C404.418 210 408 213.582 408 218C408 222.418 404.418 226 400 226C395.582 226 392 222.418 392 218C392 213.582 395.582 210 400 210Z" fill="#6C757D"/>
+                        <path d="M400 150C408.284 150 415 156.716 415 165C415 173.284 408.284 180 400 180C391.716 180 385 173.284 385 165C385 156.716 391.716 150 400 150Z" fill="white"/>
+                        <path d="M400 300C400 300 370 350 300 350C230 350 200 300 200 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M400 300C400 300 430 250 500 250C570 250 600 300 600 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M200 300C200 300 170 350 100 350C30 350 0 300 0 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M600 300C600 300 630 350 700 350C770 350 800 300 800 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                
+                <div class="error-actions">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">
+                        <i class="fas fa-home me-2"></i> Back to Homepage
+                    </a>
+                    {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('login') }}?next={{ request.path }}" class="btn btn-outline-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i> Log In
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <div class="mt-5">
+                    <p class="text-muted mb-2">You might be looking for:</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="{{ url_for('login') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-sign-in-alt me-1"></i> Log In
+                        </a>
+                        <a href="{{ url_for('signup') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-user-plus me-1"></i> Sign Up
+                        </a>
+                        <a href="{{ url_for('contact') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-envelope me-1"></i> Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add any custom JavaScript for the 403 page here
+        const errorCode = document.querySelector('.error-code');
+        if (errorCode) {
+            errorCode.style.opacity = '0';
+            errorCode.style.transform = 'scale(0.8)';
+            errorCode.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            // Trigger reflow
+            void errorCode.offsetWidth;
+            
+            // Animate in
+            errorCode.style.opacity = '1';
+            errorCode.style.transform = 'scale(1)';
+        }
+    });
+</script>
+{% endblock %}

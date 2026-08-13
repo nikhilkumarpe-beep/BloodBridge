@@ -1,0 +1,95 @@
+/* =========================================
+   SMART VISIBILITY FIX
+   ========================================= */
+
+/* 1. FORCE ALL ELEMENTS VISIBLE (but not color) */
+* {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 2. DISABLE ALL ANIMATIONS */
+.fade-in,
+.slide-in,
+.reveal-on-scroll,
+.fade-in-scroll,
+.bounce-in,
+.slide-up,
+.zoom-in {
+    transform: none !important;
+    animation: none !important;
+}
+
+/* 3. DEFAULT TEXT COLOR - Dark */
+body,
+section,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+span,
+a {
+    color: #333333 !important;
+}
+
+/* 4. EXCEPTIONS: White text on dark/gradient backgrounds */
+
+/* Page Hero Sections */
+.page-hero,
+.page-hero h1,
+.page-hero p,
+.page-hero div,
+.page-hero span {
+    color: #ffffff !important;
+}
+
+/* CTA Section */
+section.cta,
+section.cta *,
+.cta,
+.cta * {
+    color: #ffffff !important;
+}
+
+/* Footer */
+footer,
+footer * {
+    color: rgba(255, 255, 255, 0.9) !important;
+    background-color: #2c3e50 !important;
+}
+
+/* Modal Header */
+.modal-header,
+.modal-header * {
+    color: #ffffff !important;
+}
+
+/* Gradient Cards (Mission/Vision on About page) */
+div[style*="linear-gradient"] h3,
+div[style*="linear-gradient"] p,
+div[style*="linear-gradient"] li,
+div[style*="linear-gradient"] i {
+    color: #ffffff !important;
+}
+
+/* Impact Calculator Cards */
+.impact-stats .stat,
+.impact-stats .stat * {
+    color: #ffffff !important;
+}
+
+/* 5. Buttons */
+.btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.btn-primary,
+.btn-danger {
+    color: #ffffff !important;
+}

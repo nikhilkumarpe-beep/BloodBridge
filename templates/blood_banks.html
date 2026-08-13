@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Blood Banks in Bangalore - Blood Bridge{% endblock %}
+
+{% block extra_css %}
+<style>
+    .blood-bank-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--primary-color);
+        transition: all 0.3s;
+    }
+
+    .blood-bank-card:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .blood-bank-name {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .blood-bank-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #555;
+    }
+
+    .info-item i {
+        color: var(--primary-color);
+        width: 20px;
+    }
+
+    .stats-banner {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .stats-banner h3 {
+        color: white !important;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Blood Banks in Bangalore</h1>
+        <p>Complete directory of 80+ blood banks across all zones</p>
+    </div>
+</section>
+
+<!-- Blood Banks List -->
+<section style="padding: 60px 0;">
+    <div class="container">
+        <!-- Stats Banner -->
+        <div class="stats-banner">
+            <h3>80+ Blood Banks | 24/7 Emergency Services | All Blood Groups Available</h3>
+            <p style="margin: 0; color: white !important;">Find the nearest blood bank in your area</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by blood bank name or area..."
+                onkeyup="filterBloodBanks()">
+        </div>
+
+        <!-- Blood Banks List -->
+        <div id="bloodBanksList">
+            <!-- The list will be populated by JavaScript -->
+        </div>
+
+        <!-- CTA Box -->
+        <div class="card"
+            style="border: none; border-radius: 15px; padding: 40px; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); margin-top: 40px; box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 style="color: white !important; margin-bottom: 15px; font-weight: bold;">Need Blood Urgently?
+                    </h3>
+                    <p style="margin-bottom: 0; font-size: 1.1rem; color: white !important;">Contact the nearest blood
+                        bank or register on our platform to find donors in your area.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="{{ url_for('signup') }}" class="btn btn-light btn-lg"
+                        style="padding: 15px 40px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">Register
+                        Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/blood-banks-data.js') }}"></script>
+<script>
+    // Function to render blood banks
+    function renderBloodBanks(banks) {
+        const container = document.getElementById('bloodBanksList');
+        if (banks.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;"><i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px;"></i><p style="font-size: 1.2rem;">No blood banks found matching your search.</p></div>';
+            return;
+        }
+
+        container.innerHTML = banks.map(bank => `
+        <div class="blood-bank-card">
+            <h4 class="blood-bank-name">${bank.name}</h4>
+            <div class="blood-bank-info">
+                ${bank.incharge ? `<div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <span>${bank.incharge}</span>
+                </div>` : ''}
+                ${bank.mobile ? `<div class="info-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>${bank.mobile}</span>
+                </div>` : ''}
+                ${bank.phone ? `<div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>${bank.phone}</span>
+                </div>` : ''}
+                ${bank.email ? `<div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>${bank.email}</span>
+                </div>` : ''}
+                ${bank.address ? `<div class="info-item" style="flex-basis: 100%;">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${bank.address}</span>
+                </div>` : ''}
+            </div>
+        </div>
+        `).join('');
+    }
+
+    // Function to filter blood banks
+    function filterBloodBanks() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = bloodBanksData.filter(bank =>
+            bank.name.toLowerCase().includes(searchTerm) ||
+            (bank.address && bank.address.toLowerCase().includes(searchTerm)) ||
+            (bank.incharge && bank.incharge.toLowerCase().includes(searchTerm))
+        );
+        renderBloodBanks(filtered);
+    }
+
+    // Initial render
+    if (typeof bloodBanksData !== 'undefined') {
+        renderBloodBanks(bloodBanksData);
+    } else {
+        document.getElementById('bloodBanksList').innerHTML = '<div style="text-align: center; padding: 40px; color: #999;"><i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i><p style="font-size: 1.2rem;">Unable to load blood banks data. Please refresh the page.</p></div>';
+    }
+</script>
+{% endblock %}

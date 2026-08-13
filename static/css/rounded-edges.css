@@ -1,0 +1,68 @@
+/* =========================================
+   ROUNDED EDGES - Global Enhancement
+   ========================================= */
+
+/* Increase border radius for all cards and containers */
+.card,
+.contact-card,
+.blood-bank-card,
+.donor-card,
+.feature-card,
+.stat-card,
+.info-card {
+    border-radius: 20px !important;
+}
+
+/* Stats Banner - More Rounded */
+.stats-banner,
+.search-section,
+.info-banner {
+    border-radius: 20px !important;
+}
+
+/* Buttons - More Rounded */
+.btn,
+button {
+    border-radius: 30px !important;
+}
+
+/* Form Inputs - More Rounded */
+input,
+select,
+textarea {
+    border-radius: 15px !important;
+}
+
+/* Images - More Rounded */
+img {
+    border-radius: 15px !important;
+}
+
+/* Modal - More Rounded */
+.modal-content {
+    border-radius: 20px !important;
+}
+
+/* Badges - More Rounded */
+.badge,
+.tag {
+    border-radius: 20px !important;
+}
+
+/* Search Bar - More Rounded */
+.search-bar,
+.search-input {
+    border-radius: 30px !important;
+}
+
+/* Tables - Rounded Corners */
+table {
+    border-radius: 15px !important;
+    overflow: hidden;
+}
+
+/* Containers with Background - More Rounded */
+.container[style*="background"],
+div[style*="background-color"] {
+    border-radius: 20px !important;
+}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Schedule Donation - Blood Bridge{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0">Schedule Donation</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.donation_date.label(class="form-label") }}
+                            {{ form.donation_date(class="form-control", type="date") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.location.label(class="form-label") }}
+                            {{ form.location(class="form-select", id="locationSelect") }}
+                        </div>
+                        <div class="mb-3" id="homeAddressGroup" style="display: none;">
+                            {{ form.home_address.label(class="form-label") }}
+                            {{ form.home_address(class="form-control", rows=3, placeholder="Enter your full address for
+                            home visit") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.notes.label(class="form-label") }}
+                            {{ form.notes(class="form-control", rows=3) }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class="btn btn-danger btn-lg") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const locationSelect = document.getElementById('locationSelect');
+        const homeAddressGroup = document.getElementById('homeAddressGroup');
+
+        function toggleHomeAddress() {
+            if (locationSelect.value === 'Home Visit') {
+                homeAddressGroup.style.display = 'block';
+            } else {
+                homeAddressGroup.style.display = 'none';
+            }
+        }
+
+        if (locationSelect && homeAddressGroup) {
+            locationSelect.addEventListener('change', toggleHomeAddress);
+            toggleHomeAddress(); // Run on load
+        }
+    });
+</script>
+{% endblock %}

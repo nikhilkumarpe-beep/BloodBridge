@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Blood - LifeBlood</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Life<span>Blood</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="donor.html">Become a Donor</a></li>
+                <li><a href="inventory.html">Blood Bank</a></li>
+                <li><a href="search.html">Find Donors</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Request Blood Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Request Blood</h1>
+            <p>Submit a request for blood donation</p>
+        </div>
+    </section>
+
+    <!-- Request Form -->
+    <section class="request-form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Blood Request Form</h2>
+                <p>Fill out the form below to request blood. Our team will contact you shortly after reviewing your request.</p>
+                
+                <form id="bloodRequestForm" class="blood-request-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patientName">Patient's Full Name <span class="required">*</span></label>
+                            <input type="text" id="patientName" name="patientName" class="form-control" placeholder="Enter patient's full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patientAge">Patient's Age <span class="required">*</span></label>
+                            <input type="number" id="patientAge" name="patientAge" class="form-control" min="1" max="120" placeholder="Enter patient's age" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bloodGroup">Blood Group Required <span class="required">*</span></label>
+                            <select id="bloodGroup" name="bloodGroup" class="form-control" required>
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="unitsRequired">Units Required <span class="required">*</span></label>
+                            <input type="number" id="unitsRequired" name="unitsRequired" class="form-control" min="1" max="10" value="1" required>
+                            <small class="form-text">1 unit = ~450ml of blood</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requiredDate">When is the blood needed? <span class="required">*</span></label>
+                        <input type="date" id="requiredDate" name="requiredDate" class="form-control" required>
+                        <small class="form-text">Please specify the date when the blood is needed</small>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hospitalName">Hospital/Clinic Name <span class="required">*</span></label>
+                            <input type="text" id="hospitalName" name="hospitalName" class="form-control" placeholder="Enter hospital or clinic name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="doctorName">Doctor's Name</label>
+                            <input type="text" id="doctorName" name="doctorName" class="form-control" placeholder="Enter doctor's name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hospitalAddress">Hospital/Clinic Address <span class="required">*</span></label>
+                        <input type="text" id="hospitalAddress" name="hospitalAddress" class="form-control" placeholder="Enter full address" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" class="form-control" placeholder="Enter city" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="state">State/Province <span class="required">*</span></label>
+                            <input type="text" id="state" name="state" class="form-control" placeholder="Enter state/province" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="zipCode">ZIP/Postal Code</label>
+                            <input type="text" id="zipCode" name="zipCode" class="form-control" placeholder="Enter ZIP/postal code">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactPerson">Contact Person <span class="required">*</span></label>
+                            <input type="text" id="contactPerson" name="contactPerson" class="form-control" placeholder="Name of person to contact" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="relationship">Relationship to Patient <span class="required">*</span></label>
+                            <input type="text" id="relationship" name="relationship" class="form-control" placeholder="E.g., Son, Daughter, Friend" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactPhone">Contact Phone <span class="required">*</span></label>
+                            <input type="tel" id="contactPhone" name="contactPhone" class="form-control" placeholder="Enter contact number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactEmail">Contact Email</label>
+                            <input type="email" id="contactEmail" name="contactEmail" class="form-control" placeholder="Enter email address">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="patientCondition">Patient's Condition <span class="required">*</span></label>
+                        <select id="patientCondition" name="patientCondition" class="form-control" required>
+                            <option value="">Select condition</option>
+                            <option value="critical">Critical - Immediate need</option>
+                            <option value="urgent">Urgent - Within 24 hours</option>
+                            <option value="moderate">Moderate - Within 2-3 days</option>
+                            <option value="planned">Planned - Future surgery/treatment</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additionalInfo">Additional Information</label>
+                        <textarea id="additionalInfo" name="additionalInfo" class="form-control" rows="4" placeholder="Any additional information about the patient's condition or special requirements"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                        <button type="reset" class="btn btn-secondary">Reset Form</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="request-info">
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Important Information</h3>
+                    <ul>
+                        <li>Please ensure all information provided is accurate to avoid delays in processing your request.</li>
+                        <li>Our team will verify the details with the hospital before proceeding with donor matching.</li>
+                        <li>In case of emergency, please call the hospital directly or emergency services.</li>
+                        <li>You will receive a confirmation message once your request is submitted successfully.</li>
+                    </ul>
+                </div>
+                
+                <div class="emergency-contact">
+                    <h3><i class="fas fa-ambulance"></i> Emergency?</h3>
+                    <p>If this is a life-threatening emergency, please call emergency services immediately.</p>
+                    <a href="tel:911" class="btn btn-emergency"><i class="fas fa-phone"></i> Call Emergency Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works light-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>How the Blood Request Process Works</h2>
+                <p>Simple steps to get the blood you need</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Submit Request</h3>
+                    <p>Fill out the blood request form with all necessary details about the patient and hospital.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Verification</h3>
+                    <p>Our team verifies the request with the hospital and checks blood availability.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Donor Matching</h3>
+                    <p>We notify matching donors in the area and coordinate the donation process.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Blood Donation</h3>
+                    <p>The donor donates blood at the nearest blood bank or hospital.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Completion</h3>
+                    <p>The blood is delivered to the hospital for the patient's treatment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about blood requests</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How quickly can I get blood after making a request?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Response time depends on blood type availability and urgency. For critical cases, we prioritize the request and aim to find donors within hours. Non-emergency requests may take 24-48 hours to process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is there a cost for requesting blood?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>LifeBlood does not charge for connecting patients with donors. However, there may be standard processing and testing fees charged by the blood bank or hospital for the blood units.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What information do I need to provide when making a request?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You'll need to provide the patient's full name, blood type, hospital details, contact information, and the date when blood is needed. Additional medical information may be required for verification.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I request blood for someone else?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can request blood on behalf of someone else. Please ensure you have the patient's consent and accurate medical information before submitting the request.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What happens after I submit a blood request?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>After submission, our team will verify the request with the hospital. Once verified, we'll start searching for matching donors. You'll receive updates via phone or email about the status of your request.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Need Help?</h2>
+            <p>Our support team is available 24/7 to assist you with your blood request</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">Contact Support</a>
+                <a href="tel:+1234567890" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>LifeBlood</h3>
+                <p>Connecting donors with those in need. Every drop counts.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="donor.html">Become a Donor</a></li>
+                    <li><a href="inventory.html">Blood Bank</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Health Street, City, Country</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                <p><i class="fas fa-envelope"></i> info@lifeblood.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 LifeBlood. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

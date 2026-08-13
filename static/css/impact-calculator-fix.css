@@ -1,0 +1,41 @@
+/* =========================================
+   IMPACT CALCULATOR - FORCE GRADIENT BOXES
+   ========================================= */
+
+/* Force 2-column grid layout */
+.impact-stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    margin-top: 30px !important;
+}
+
+/* Force gradient backgrounds to display */
+.impact-stats .stat {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c) !important;
+    padding: 20px !important;
+    border-radius: 15px !important;
+    color: white !important;
+}
+
+.impact-stats .stat:nth-child(2) {
+    background: linear-gradient(135deg, #FF9933, #FF6F00) !important;
+}
+
+.impact-stats .stat * {
+    color: white !important;
+}
+
+.impact-stats .stat i {
+    font-size: 2.5rem !important;
+    margin-bottom: 10px !important;
+}
+
+.impact-stats .stat h3 {
+    font-size: 2.5rem !important;
+    margin: 10px 0 !important;
+}
+
+.impact-stats .stat p {
+    margin: 0 !important;
+}

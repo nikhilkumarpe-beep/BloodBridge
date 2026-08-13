@@ -1,0 +1,539 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Blood Bridge{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        position: static !important;
+    }
+
+    .welcome-card {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .welcome-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, #e63946, #ff6b6b);
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        height: 100%;
+        border-left: 4px solid #e63946;
+        transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-card .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #e63946;
+        margin: 0.5rem 0;
+    }
+
+    .stat-card .stat-label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-card .stat-icon {
+        font-size: 2rem;
+        color: #e63946;
+        margin-bottom: 1rem;
+    }
+
+    .recent-activity {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .activity-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+        color: #e63946;
+    }
+
+    .activity-content {
+        flex-grow: 1;
+    }
+
+    .activity-time {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    .upcoming-donations {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+    }
+
+    .donation-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .donation-item:last-child {
+        border-bottom: none;
+    }
+
+    .donation-date {
+        font-weight: 600;
+        color: #212529;
+    }
+
+    .donation-location {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .badge-upcoming {
+        background-color: #e3f2fd;
+        color: #0d47a1;
+    }
+
+    .badge-completed {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .badge-cancelled {
+        background-color: #ffebee;
+        color: #c62828;
+    }
+
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .action-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        border: 1px solid #eee;
+    }
+
+    .action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-color: #e63946;
+    }
+
+    .action-card i {
+        font-size: 1.5rem;
+        color: #e63946;
+        margin-bottom: 0.5rem;
+    }
+
+    .action-card .action-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .action-card .action-desc {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .blood-type-badge {
+        display: inline-block;
+        background-color: #e63946;
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+    }
+
+    .profile-completion {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .progress {
+        height: 10px;
+        margin: 1rem 0;
+    }
+
+    .progress-bar {
+        background-color: #e63946;
+    }
+
+    @media (max-width: 768px) {
+        .quick-actions {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .stat-card {
+            margin-bottom: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .quick-actions {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Dashboard Header -->
+<header class="dashboard-header">
+    <div class="container">
+        <div class="welcome-card">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2>Welcome back, {{ current_user.first_name }}!</h2>
+                    <p class="lead mb-0">Here's what's happening with your account today.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <div class="d-flex justify-content-md-end">
+                        <div class="text-center me-4">
+                            <div class="blood-type-badge">{{ current_user.blood_type or 'Set Blood Type' }}</div>
+                            <div class="small mt-1">Blood Type</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="h4 mb-0">{{ stats.total_donations or 0 }}</div>
+                            <div class="small">Donations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<section class="section">
+    <div class="container">
+        <!-- Profile Completion -->
+        {% if profile_completion < 100 %} <div class="profile-completion">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Complete Your Profile</h5>
+                <span class="badge bg-primary">{{ profile_completion }}% Complete</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{ profile_completion }}%"
+                    aria-valuenow="{{ profile_completion }}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <p class="mb-0 small mt-2">
+                Complete your profile to unlock all features and help us match you better with donation opportunities.
+                <a href="{{ url_for('profile') }}" class="text-primary">Complete Now</a>
+            </p>
+    </div>
+    {% endif %}
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <a href="{{ url_for('request_blood') }}" class="action-card">
+            <i class="fas fa-tint"></i>
+            <div class="action-title">Request Blood</div>
+            <div class="action-desc">Request blood for yourself or a loved one</div>
+        </a>
+
+        <a href="{{ url_for('donors') }}" class="action-card">
+            <i class="fas fa-search"></i>
+            <div class="action-title">Find Donors</div>
+            <div class="action-desc">Search for available blood donors</div>
+        </a>
+
+        <a href="{{ url_for('schedule_donation') }}" class="action-card">
+            <i class="fas fa-calendar-plus"></i>
+            <div class="action-title">Schedule Donation</div>
+            <div class="action-desc">Book your next blood donation</div>
+        </a>
+
+        <a href="{{ url_for('donation_history') }}" class="action-card">
+            <i class="fas fa-history"></i>
+            <div class="action-title">Donation History</div>
+            <div class="action-desc">View your past donations</div>
+        </a>
+    </div>
+
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-8">
+            <!-- Stats Row -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.total_donations or 0 }}</div>
+                        <div class="stat-label">Total Donations</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.lives_impacted or 0 }}+</div>
+                        <div class="stat-label">Lives Impacted</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.badges_earned or 0 }}</div>
+                        <div class="stat-label">Badges Earned</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Recent Activity</h5>
+                    <a href="#" class="btn btn-sm btn-outline-secondary">View All</a>
+                </div>
+
+                {% if recent_activities %}
+                {% for activity in recent_activities %}
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="{{ activity.icon }}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-1">{{ activity.title }}</h6>
+                            <span class="activity-time">{{ activity.time_ago }}</span>
+                        </div>
+                        <p class="mb-0 small">{{ activity.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No recent activity to show</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Blood Requests -->
+            <div class="recent-activity mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Your Blood Requests</h5>
+                    <a href="#" class="btn btn-sm btn-outline-secondary">View All</a>
+                </div>
+
+                {% if blood_requests %}
+                {% for request in blood_requests %}
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-1">
+                                {{ request.blood_type }} Blood Request
+                                <span
+                                    class="badge bg-{{ 'success' if request.status == 'fulfilled' else 'warning' if request.status == 'pending' else 'danger' }}">
+                                    {{ request.status|title }}
+                                </span>
+                            </h6>
+                            <span class="activity-time">{{ request.date_requested|time_ago }}</span>
+                        </div>
+                        <p class="mb-0 small">
+                            {{ request.units_needed }} units needed by {{ request.required_by|date_format('%b %d, %Y')
+                            }}
+                            {% if request.hospital %}
+                            • {{ request.hospital }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No blood requests found</p>
+                    <a href="{{ url_for('request_blood') }}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-plus me-1"></i> New Request
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-4">
+            <!-- Upcoming Donations -->
+            <div class="upcoming-donations mb-4">
+                <h5>Upcoming Donations</h5>
+
+                {% if upcoming_donations %}
+                {% for donation in upcoming_donations %}
+                <div class="donation-item">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="donation-date">
+                                {{ donation.date|date_format('%b %d, %Y') }}
+                                <span
+                                    class="badge badge-{{ 'upcoming' if donation.status == 'scheduled' else 'completed' if donation.status == 'completed' else 'cancelled' }}">
+                                    {{ donation.status|title }}
+                                </span>
+                            </div>
+                            <div class="donation-location">
+                                <i class="fas fa-map-marker-alt me-1"></i> {{ donation.location }}
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View</a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-calendar-alt fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No upcoming donations</p>
+                    <a href="{{ url_for('schedule_donation') }}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-plus me-1"></i> Schedule Donation
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Blood Donation Tips -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0">Donation Tips</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6 class="text-primary">Before Donating</h6>
+                        <ul class="small">
+                            <li>Drink plenty of water</li>
+                            <li>Eat iron-rich foods</li>
+                            <li>Get a good night's sleep</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 class="text-primary">After Donating</h6>
+                        <ul class="small">
+                            <li>Drink extra fluids</li>
+                            <li>Avoid heavy lifting</li>
+                            <li>Keep the bandage on for several hours</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ url_for('donation_tips') }}" class="btn btn-sm btn-outline-primary w-100">
+                            More Tips <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0">Your Impact</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <div class="display-4 text-danger">{{ stats.total_donations or 0 }}</div>
+                        <p class="text-muted mb-0">Donations Made</p>
+                    </div>
+                    <div class="d-flex justify-content-between text-center">
+                        <div>
+                            <div class="h5 mb-0">{{ stats.last_donation|date_format('%b %Y') or 'Never' }}</div>
+                            <div class="small text-muted">Last Donation</div>
+                        </div>
+                        <div>
+                            <div class="h5 mb-0">{{ stats.next_eligible|date_format('%b %d, %Y') or 'Now' }}</div>
+                            <div class="small text-muted">Eligible to Donate</div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ url_for('schedule_donation') }}" class="btn btn-danger w-100">
+                            <i class="fas fa-tint me-1"></i> Schedule Next Donation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize any dashboard-specific JavaScript here
+
+        // Example: Mark notifications as read when clicked
+        document.querySelectorAll('.activity-item').forEach(item => {
+            item.addEventListener('click', function () {
+                // In a real app, you would mark the notification as read via AJAX
+                this.classList.remove('bg-light');
+            });
+        });
+
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+{% endblock %}

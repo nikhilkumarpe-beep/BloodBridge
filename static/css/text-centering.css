@@ -1,0 +1,49 @@
+/* =========================================
+   TEXT CENTERING FIX - All Pages
+   ========================================= */
+
+/* Force center ALL text in contact section */
+.contact-section p,
+.contact-section .section-subtitle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 700px !important;
+}
+
+/* Ensure parent container is centered */
+.contact-section .text-center {
+    text-align: center !important;
+}
+
+.contact-section .row {
+    justify-content: center !important;
+}
+
+/* Center all headings too */
+.contact-section h1,
+.contact-section h2,
+.contact-section h3 {
+    text-align: center !important;
+}
+
+/* CTA Section - Force center ALL elements */
+section.cta,
+section.cta *,
+.cta,
+.cta *,
+section[class*="cta"],
+section[class*="cta"] * {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Specifically target CTA paragraphs */
+section.cta p,
+.cta p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+}

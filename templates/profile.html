@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - Blood Bridge{% endblock %}
+
+{% block content %}
+<section class="page-hero"
+    style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); padding: 60px 0; text-align: center;">
+    <div class="container">
+        <h1>My Profile</h1>
+        <p>Manage your account information</p>
+    </div>
+</section>
+
+<section style="padding: 60px 0;">
+    <div class="container">
+        <div class="row">
+            <!-- Profile Sidebar -->
+            <div class="col-md-3">
+                <div class="card" style="text-align: center; padding: 30px;">
+                    {% if current_user.profile_image %}
+                    <img src="{{ url_for('static', filename='uploads/' + current_user.profile_image) }}" alt="Profile"
+                        style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; object-fit: cover;">
+                    {% else %}
+                    <div
+                        style="width: 150px; height: 150px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 20px;">
+                        {{ current_user.first_name[0] }}{{ current_user.last_name[0] }}
+                    </div>
+                    {% endif %}
+
+                    <h3>{{ current_user.full_name }}</h3>
+                    <p style="color: var(--gray-text);">{{ current_user.email }}</p>
+
+                    {% if current_user.blood_type %}
+                    <div
+                        style="background: var(--primary-color); color: white; padding: 10px; border-radius: 8px; margin-top: 15px;">
+                        <strong>Blood Type: {{ current_user.blood_type }}</strong>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Profile Form -->
+            <div class="col-md-9">
+                <div class="card" style="padding: 40px;">
+                    <h2 style="margin-bottom: 30px;">Personal Information</h2>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() if form else '' }}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" name="first_name" class="form-control"
+                                        value="{{ current_user.first_name }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" name="last_name" class="form-control"
+                                        value="{{ current_user.last_name }}" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" value="{{ current_user.email }}" disabled>
+                                    <small style="color: var(--gray-text);">Email cannot be changed</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" name="phone" class="form-control"
+                                        value="{{ current_user.phone or '' }}" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Blood Type</label>
+                                    <select name="blood_type" class="form-control">
+                                        <option value="">Select Blood Type</option>
+                                        {% for type in ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] %}
+                                        <option value="{{ type }}" {% if current_user.blood_type==type %}selected{%
+                                            endif %}>
+                                            {{ type }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" name="date_of_birth" class="form-control"
+                                        value="{{ current_user.date_of_birth.strftime('%Y-%m-%d') if current_user.date_of_birth else '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select name="gender" class="form-control">
+                                        <option value="">Select Gender</option>
+                                        <option value="Male" {% if current_user.gender=='Male' %}selected{% endif %}>
+                                            Male</option>
+                                        <option value="Female" {% if current_user.gender=='Female' %}selected{% endif
+                                            %}>Female</option>
+                                        <option value="Other" {% if current_user.gender=='Other' %}selected{% endif %}>
+                                            Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" name="address" class="form-control"
+                                value="{{ current_user.address or '' }}">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" name="city" class="form-control"
+                                        value="{{ current_user.city or '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input type="text" name="state" class="form-control"
+                                        value="{{ current_user.state or '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" name="postal_code" class="form-control"
+                                        value="{{ current_user.postal_code or '' }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Profile Picture</label>
+                            <input type="file" name="profile_image" class="form-control" accept="image/*">
+                        </div>
+
+                        <div style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,481 @@
+{% extends "base.html" %}
+
+{% block title %}Home - BloodBridge{% endblock %}
+
+{% block content %}
+<!-- FORCE LAYOUT FIX -->
+<style>
+    /* Force Hero Section to be compact */
+    section.hero {
+        padding-top: 50px !important;
+        padding-bottom: 20px !important;
+        min-height: auto !important;
+        height: auto !important;
+        margin-top: 0 !important;
+        display: block !important;
+    }
+
+    /* Pull content up forcefully */
+    .hero .container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    /* Ensure text is tight */
+    .hero-content h1 {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Remove bottom space */
+    .hero-content p {
+        margin-bottom: 15px !important;
+    }
+
+    .cta-buttons {
+        margin-bottom: 0 !important;
+    }
+
+    /* Fix canvas interference */
+    #particleCanvas {
+        z-index: 0 !important;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero"
+    style="position: relative; overflow: hidden; padding: 50px 0 40px 0 !important; margin: 0 !important; background-image: url({{ url_for('static', filename='images/hero_background.png') }}); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+    <!-- White Overlay -->
+    <div
+        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.85); z-index: 0;">
+    </div>
+
+    <div class="container"
+        style="position: relative; z-index: 1; text-align: center !important; padding-top: 0 !important; margin-top: 0 !important;">
+        <div class="hero-content" style="margin: 0 auto !important; max-width: 800px !important;">
+            <h1 class="gradient-animated"
+                style="background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0 !important; padding-top: 0 !important; margin-bottom: 10px !important; line-height: 1.2;">
+                Raktdaan Mahadan <br><span
+                    style="font-size: 0.6em; font-weight: 400; -webkit-text-fill-color: inherit; color: #d32f2f;">Donate
+                    Blood, Save Lives</span>
+            </h1>
+            <p class="reveal-on-scroll" style="margin-bottom: 25px !important; color: #444; font-weight: 500;">Join
+                India's largest community of life-savers. Your single donation can save up
+                to 3 lives. Be a hero for
+                someone today.</p>
+            <div class="cta-buttons reveal-on-scroll"
+                style="display: flex !important; justify-content: center !important; gap: 15px !important; flex-wrap: wrap;">
+                <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg float-animation">Become a Donor</a>
+                <button id="startQuizBtn" class="btn btn-secondary btn-lg pulse-animation"
+                    style="background: white; color: var(--primary-color); border: 2px solid var(--primary-color);"
+                    onclick="document.getElementById('quizModal').style.display='block'">Check Eligibility</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section"
+    style="padding: 30px 0; background: #fff; margin-top: 0; position: relative; z-index: 10; border-radius: 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.05);">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Impact Across India</h2>
+            <p>Together we are making a difference in thousands of lives.</p>
+        </div>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+            <div class="stat-card card" style="padding: 30px;">
+                <i class="fas fa-user-friends"
+                    style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 5px;">{{
+                    total_donors|default('1.2 Lakh+') }}</h3>
+                <p>Active Donors</p>
+            </div>
+            <div class="stat-card card" style="padding: 30px;">
+                <i class="fas fa-tint" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 5px;">{{
+                    total_donations|default('50,000+') }}</h3>
+                <p>Total Donations</p>
+            </div>
+            <div class="stat-card card" style="padding: 30px;">
+                <i class="fas fa-heartbeat"
+                    style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 5px;">{{
+                    lives_saved|default('1.5 Lakh+') }}</h3>
+                <p>Lives Saved</p>
+            </div>
+            <div class="stat-card card" style="padding: 30px;">
+                <i class="fas fa-hospital"
+                    style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                <h3 style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 5px;">{{
+                    active_campaigns|default('500+') }}</h3>
+                <p>Partner Hospitals</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features" style="background-color: var(--light-bg);">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Donate Blood?</h2>
+            <p>Blood donation is a simple act that has a huge impact.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+            <div class="feature-card card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Save Lives</h3>
+                <p>Every drop counts. Your donation can help accident victims, surgery patients, and Thalassemia
+                    patients.</p>
+            </div>
+            <div class="feature-card card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Quick & Easy</h3>
+                <p>The entire process takes less than an hour. We organize camps across major cities like Delhi, Mumbai,
+                    Bangalore.</p>
+            </div>
+            <div class="feature-card card">
+                <div class="feature-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Health Check</h3>
+                <p>Get a free mini-physical. We check your pulse, blood pressure, body temperature, and hemoglobin
+                    levels.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<!-- Interesting Facts Section -->
+<section class="facts-section" style="padding: 80px 0; background-color: #f9f9f9;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Did You Know?</h2>
+            <p>Interesting facts about blood donation that might surprise you.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+            <div class="card" style="padding: 30px; text-align: center; height: 100%;">
+                <div
+                    style="width: 70px; height: 70px; background: rgba(231, 76, 60, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-users" style="font-size: 2rem; color: var(--primary-color);"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px;">1 in 3 Lives</h3>
+                <p>One pint of blood can save up to 3 lives. Your single donation makes a massive difference.</p>
+            </div>
+            <div class="card" style="padding: 30px; text-align: center; height: 100%;">
+                <div
+                    style="width: 70px; height: 70px; background: rgba(231, 76, 60, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-clock" style="font-size: 2rem; color: var(--primary-color);"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Every 2 Seconds</h3>
+                <p>Someone in India needs blood every two seconds. The demand is constant and urgent.</p>
+            </div>
+            <div class="card" style="padding: 30px; text-align: center; height: 100%;">
+                <div
+                    style="width: 70px; height: 70px; background: rgba(231, 76, 60, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-flask" style="font-size: 2rem; color: var(--primary-color);"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Cannot be Made</h3>
+                <p>Blood cannot be manufactured in a lab. It can only come from generous donors like you.</p>
+            </div>
+            <div class="card" style="padding: 30px; text-align: center; height: 100%;">
+                <div
+                    style="width: 70px; height: 70px; background: rgba(231, 76, 60, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-dna" style="font-size: 2rem; color: var(--primary-color);"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Universal Donor</h3>
+                <p>Type O-Negative blood is the universal donor type and is critical in emergency situations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works">
+    <div class="container">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Becoming a donor is simple and straightforward.</p>
+        </div>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; position: relative;">
+            <div class="step" style="text-align: center; position: relative; z-index: 1;">
+                <div
+                    style="width: 60px; height: 60px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 20px;">
+                    1</div>
+                <h3>Register</h3>
+                <p>Create an account and complete your donor profile with your blood type and location.</p>
+            </div>
+            <div class="step" style="text-align: center; position: relative; z-index: 1;">
+                <div
+                    style="width: 60px; height: 60px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 20px;">
+                    2</div>
+                <h3>Get Matched</h3>
+                <p>Receive notifications when someone in your area needs your blood type.</p>
+            </div>
+            <div class="step" style="text-align: center; position: relative; z-index: 1;">
+                <div
+                    style="width: 60px; height: 60px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 20px;">
+                    3</div>
+                <h3>Donate</h3>
+                <p>Visit the nearest blood bank or donation center to complete your donation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Calculator Section -->
+<section class="impact-calculator" style="padding: 80px 0; background: linear-gradient(135deg, #fff 0%, #fffdf9 100%);">
+    <div class="container">
+        <div class="section-title reveal-on-scroll">
+            <h2>Calculate Your Impact</h2>
+            <p>See how many lives you can save with your donations</p>
+        </div>
+        <div id="impactCalculator" class="card"
+            style="max-width: 600px; margin: 0 auto; padding: 40px; text-align: center;">
+            <div class="form-group" style="margin-bottom: 30px;">
+                <label style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: block;">Number of
+                    Donations</label>
+                <input type="range" id="donationsCount" min="1" max="50" value="1"
+                    style="width: 100%; height: 8px; border-radius: 5px; background: #ddd; outline: none; -webkit-appearance: none;">
+                <div style="margin-top: 10px; font-size: 2rem; font-weight: bold; color: var(--primary-color);">
+                    <span id="donationValue">1</span> Donations
+                </div>
+            </div>
+            <div id="impactResult" class="bounce-in">
+                <div class="impact-stats"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div class="stat card-3d"
+                        style="padding: 20px; background: linear-gradient(135deg, #d32f2f, #b71c1c); color: white !important; border-radius: 15px;">
+                        <i class="fas fa-heartbeat"
+                            style="font-size: 2.5rem; margin-bottom: 10px; color: white !important;"></i>
+                        <h3 style="font-size: 2.5rem; margin: 10px 0; color: white !important;">3</h3>
+                        <p style="margin: 0; color: white !important;">Lives Saved</p>
+                    </div>
+                    <div class="stat card-3d"
+                        style="padding: 20px; background: linear-gradient(135deg, #FF9933, #FF6F00); color: white !important; border-radius: 15px;">
+                        <i class="fas fa-tint"
+                            style="font-size: 2.5rem; margin-bottom: 10px; color: white !important;"></i>
+                        <h3 style="font-size: 2.5rem; margin: 10px 0; color: white !important;">0.45L</h3>
+                        <p style="margin: 0; color: white !important;">Blood Donated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta" style="background: var(--secondary-color); color: white; text-align: center; padding: 100px 0;">
+    <div class="container">
+        <h2 style="margin-bottom: 20px;">Ready to Make a Difference?</h2>
+        <p style="max-width: 600px; margin: 0 auto 40px; text-align: center;">Join thousands of donors who are
+            saving lives every day. It only takes a few minutes to sign up.</p>
+        <div class="cta-buttons" style="justify-content: center;">
+            <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg">Register as a Donor</a>
+            <a href="{{ url_for('inventory') }}" class="btn btn-secondary btn-lg"
+                style="border-color: white; color: white;">View Blood Bank</a>
+        </div>
+    </div>
+</section>
+
+<!-- Eligibility Quiz Modal -->
+<div id="quizModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Check Eligibility</h3>
+            <span class="close-modal" style="cursor: pointer; font-size: 24px;"
+                onclick="document.getElementById('quizModal').style.display='none'">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div id="quizResult"></div>
+            <div class="quiz-question">
+                <p>1. Are you between 18 and 65 years old?</p>
+                <label class="quiz-option"><input type="radio" name="age" value="yes"> Yes</label>
+                <label class="quiz-option"><input type="radio" name="age" value="no"> No</label>
+            </div>
+            <div class="quiz-question">
+                <p>2. Is your weight above 45 kg?</p>
+                <label class="quiz-option"><input type="radio" name="weight" value="yes"> Yes</label>
+                <label class="quiz-option"><input type="radio" name="weight" value="no"> No</label>
+            </div>
+            <div class="quiz-question">
+                <p>3. Have you donated blood in the last 3 months?</p>
+                <label class="quiz-option"><input type="radio" name="health" value="no"> Yes</label>
+                <label class="quiz-option"><input type="radio" name="health" value="yes"> No</label>
+            </div>
+            <button id="submitQuiz" class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="
+                    var age = document.querySelector('input[name=\'age\']:checked');
+                    var weight = document.querySelector('input[name=\'weight\']:checked');
+                    var health = document.querySelector('input[name=\'health\']:checked');
+                    var resultDiv = document.getElementById('quizResult');
+                    if (!age || !weight || !health) {
+                        resultDiv.innerHTML = '<div style=\'padding: 15px; background: #f8d7da; color: #721c24; border-radius: 8px; margin-bottom: 20px;\'><i class=\'fas fa-exclamation-triangle\'></i> Please answer all questions.</div>';
+                    } else if (age.value === 'yes' && weight.value === 'yes' && health.value === 'yes') {
+                        resultDiv.innerHTML = '<div style=\'padding: 15px; background: #d4edda; color: #155724; border-radius: 8px; margin-bottom: 20px;\'><i class=\'fas fa-check-circle\'></i> <strong>Great!</strong> You are likely eligible to donate blood. <a href=\'/signup\' style=\'color: #155724; font-weight: bold; text-decoration: underline;\'>Register Now</a></div>';
+                    } else {
+                        var reason = age.value === 'no' ? 'You must be between 18 and 65 years old.' : (weight.value === 'no' ? 'You must weigh at least 45 kg.' : 'You must wait at least 3 months between donations.');
+                        resultDiv.innerHTML = '<div style=\'padding: 15px; background: #fff3cd; color: #856404; border-radius: 8px; margin-bottom: 20px;\'><i class=\'fas fa-info-circle\'></i> <strong>Not Eligible:</strong> ' + reason + '</div>';
+                    }
+                ">Check Now</button>
+        </div>
+    </div>
+</div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/918105336328" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Animation for stat numbers
+    const stats = document.querySelectorAll('.stat-card h3');
+
+    const animateStats = () => {
+        stats.forEach(stat => {
+            const target = parseInt(stat.innerText.replace(/,/g, '').replace('+', ''));
+            const duration = 2000; // 2 seconds
+            const step = target / (duration / 16); // 60fps
+
+            let current = 0;
+            const updateCount = () => {
+                current += step;
+                if (current < target) {
+                    stat.innerText = Math.floor(current).toLocaleString() + '+';
+                    requestAnimationFrame(updateCount);
+                } else {
+                    stat.innerText = target.toLocaleString() + '+';
+                }
+            };
+
+            updateCount();
+        });
+    };
+
+    // Trigger animation when stats section is in view
+    const statsSection = document.querySelector('.stats-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+
+    // Impact Calculator
+    const donationsInput = document.getElementById('donationsCount');
+    const donationValue = document.getElementById('donationValue');
+
+    if (donationsInput) {
+        donationsInput.addEventListener('input', (e) => {
+            const donations = parseInt(e.target.value);
+            donationValue.textContent = donations;
+
+            const livesSaved = donations * 3;
+            const bloodDonated = (donations * 450 / 1000).toFixed(2); // Convert ml to L
+
+            // Find the existing h3 elements and update them directly
+            const impactResult = document.getElementById('impactResult');
+            const statDivs = impactResult.querySelectorAll('.stat');
+
+            if (statDivs && statDivs.length >= 2) {
+                // Update first card (Lives Saved)
+                const livesH3 = statDivs[0].querySelector('h3');
+                if (livesH3) {
+                    livesH3.textContent = livesSaved;
+                }
+
+                // Update second card (Blood Donated)
+                const bloodH3 = statDivs[1].querySelector('h3');
+                if (bloodH3) {
+                    bloodH3.textContent = bloodDonated + 'L';
+                }
+            }
+        });
+    }
+
+    // ===== Eligibility Quiz =====
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const quizModal = document.getElementById('quizModal');
+    const closeModal = document.querySelector('.close-modal');
+    const submitQuizBtn = document.getElementById('submitQuiz');
+
+    if (startQuizBtn && quizModal) {
+        startQuizBtn.addEventListener('click', function () {
+            quizModal.style.display = 'block';
+        });
+    }
+
+    if (closeModal && quizModal) {
+        closeModal.addEventListener('click', function () {
+            quizModal.style.display = 'none';
+        });
+    }
+
+    if (quizModal) {
+        window.addEventListener('click', function (event) {
+            if (event.target === quizModal) {
+                quizModal.style.display = 'none';
+            }
+        });
+    }
+
+    if (submitQuizBtn) {
+        submitQuizBtn.addEventListener('click', function () {
+            const age = document.querySelector('input[name="age"]:checked');
+            const weight = document.querySelector('input[name="weight"]:checked');
+            const health = document.querySelector('input[name="health"]:checked');
+
+            const resultDiv = document.getElementById('quizResult');
+
+            if (!age || !weight || !health) {
+                resultDiv.innerHTML = '<div style="padding: 15px; background: #f8d7da; color: #721c24; border-radius: 8px; margin-bottom: 20px;"><i class="fas fa-exclamation-triangle"></i> Please answer all questions.</div>';
+                return;
+            }
+
+            if (age.value === 'yes' && weight.value === 'yes' && health.value === 'yes') {
+                resultDiv.innerHTML = '<div style="padding: 15px; background: #d4edda; color: #155724; border-radius: 8px; margin-bottom: 20px;"><i class="fas fa-check-circle"></i> <strong>Great!</strong> You are likely eligible to donate blood. <a href="/signup" style="color: #155724; font-weight: bold; text-decoration: underline;">Register Now</a></div>';
+
+                // Trigger confetti
+                if (typeof createConfetti === 'function') {
+                    createConfetti();
+                }
+            } else {
+                let reason = '';
+                if (age.value === 'no') reason = 'You must be between 18 and 65 years old.';
+                else if (weight.value === 'no') reason = 'You must weigh at least 45 kg.';
+                else if (health.value === 'no') reason = 'You must wait at least 3 months between donations.';
+
+                resultDiv.innerHTML = '<div style="padding: 15px; background: #fff3cd; color: #856404; border-radius: 8px; margin-bottom: 20px;"><i class="fas fa-info-circle"></i> <strong>Not Eligible:</strong> ' + reason + ' Please consult a doctor for more information.</div>';
+            }
+        });
+    }
+
+    // Check for success message and trigger confetti
+    const flashMessages = document.querySelectorAll('.alert-success');
+    if (flashMessages.length > 0) {
+        // Trigger confetti if there's a success message
+        if (typeof createConfetti === 'function') {
+            createConfetti();
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,157 @@
+/* =========================================
+   BANGALORE / KARNATAKA THEME
+   Regional theming and cultural elements
+   ========================================= */
+
+/* Karnataka Flag Colors Enhancement */
+:root {
+    --karnataka-yellow: #FFD700;
+    --karnataka-red: #D32F2F;
+    --karnataka-white: #FFFFFF;
+}
+
+/* Karnataka Flag Color Accents */
+.karnataka-accent {
+    border-left: 4px solid var(--karnataka-yellow);
+    border-right: 4px solid var(--karnataka-red);
+}
+
+.karnataka-badge {
+    background: linear-gradient(135deg, var(--karnataka-yellow), var(--karnataka-red));
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Regional Icons */
+.region-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Bangalore Map Watermark */
+.bangalore-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.03;
+    width: 400px;
+    height: 400px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Blood Bank Cards with Regional Styling */
+.blood-bank-card.regional {
+    border-top: 3px solid var(--karnataka-yellow);
+    position: relative;
+}
+
+.blood-bank-card.regional::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--karnataka-yellow), var(--karnataka-red));
+}
+
+/* Location Pins with Karnataka Colors */
+.location-pin {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--karnataka-yellow), var(--karnataka-red));
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: inline-block;
+    position: relative;
+}
+
+.location-pin::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* Dashboard Regional Enhancements */
+.dashboard-header.regional {
+    background: linear-gradient(135deg,
+            var(--karnataka-yellow) 0%,
+            var(--karnataka-red) 50%,
+            var(--secondary-color) 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+/* Regional Stats Badges */
+.stat-badge.regional {
+    background: linear-gradient(135deg, var(--karnataka-yellow), var(--karnataka-red));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Footer Regional Elements */
+footer .regional-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+footer .regional-info .icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* Smooth Transitions for Regional Elements */
+.karnataka-accent,
+.blood-bank-card.regional,
+.stat-badge.regional {
+    transition: all 0.3s ease-in-out;
+}
+
+.blood-bank-card.regional:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .bangalore-watermark {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Print Styles */
+@media print {
+
+    .bangalore-watermark,
+    .karnataka-accent {
+        display: none;
+    }
+}

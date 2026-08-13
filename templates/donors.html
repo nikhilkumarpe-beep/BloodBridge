@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+
+{% block title %}Find Donors - Blood Bridge{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-hero {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 0;
+    }
+
+    .search-section {
+        margin-top: -40px;
+        padding-bottom: 40px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .search-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .donor-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #eee;
+    }
+
+    .donor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .donor-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+    }
+
+    .blood-type {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border: 2px solid white;
+    }
+
+    .donor-actions .btn {
+        border-radius: 20px;
+        padding: 5px 15px;
+        margin-left: 5px;
+    }
+
+    .no-donors {
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .no-donors i {
+        font-size: 4rem;
+        color: #e63946;
+        margin-bottom: 1rem;
+    }
+
+    /* Custom Modal Styles */
+    .custom-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .custom-modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        animation: slideDown 0.3s ease;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #aaa;
+    }
+
+    .close-modal:hover {
+        color: #000;
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero"
+    style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%) !important; padding: 40px 0 !important; margin: 0 !important; margin-top: 0 !important;">
+    <div class="container" style="text-align: center;">
+        <h1 style="margin-bottom: 10px !important; color: white !important;">Find Blood Donors</h1>
+        <p style="margin-bottom: 0 !important; opacity: 0.9; color: white !important;">Connect with willing blood donors
+            in your area</p>
+    </div>
+</section>
+
+<!-- Search Section -->
+<section class="search-section">
+    <div class="container">
+        <div class="search-card">
+            <form id="donorSearchForm">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="bloodType" class="form-label">Blood Type</label>
+                        <select class="form-select" id="bloodType" required>
+                            <option value="" selected disabled>Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="City or ZIP code" required>
+                    </div>
+                    <div class="col-md-4 mb-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search me-2"></i> Search Donors
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Results Section -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Donors List -->
+                <div id="donorList">
+                    <div class="text-center text-muted py-5">
+                        <i class="fas fa-search fa-3x mb-3 text-secondary"></i>
+                        <h5>Enter your location and blood type to find donors</h5>
+                    </div>
+                </div>
+
+                <!-- No Results (Hidden by default) -->
+                <div id="noResults" class="no-donors" style="display: none;">
+                    <i class="fas fa-user-slash"></i>
+                    <h4>No donors found</h4>
+                    <p class="text-muted">Try adjusting your search criteria or check back later.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom Contact Modal -->
+<div id="customContactModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 class="mb-3" style="color: var(--primary-color);">Contact Donor</h3>
+        <form id="customContactForm" onsubmit="handleContactSubmit(event)">
+            <div class="mb-3">
+                <label class="form-label">To:</label>
+                <input type="text" id="modalDonorName" class="form-control" readonly style="background: #f8f9fa;">
+                <input type="hidden" id="modalDonorEmail">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Your Message:</label>
+                <textarea class="form-control" rows="4" placeholder="Hi, I am looking for blood donation..."
+                    required></textarea>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-danger">Send Message</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Handle search form submission
+        const searchForm = document.getElementById('donorSearchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const bloodType = document.getElementById('bloodType').value;
+                const location = document.getElementById('location').value;
+
+                // Show loading state
+                const searchBtn = searchForm.querySelector('button[type="submit"]');
+                const originalBtnText = searchBtn.innerHTML;
+                searchBtn.disabled = true;
+                searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Searching...';
+
+                fetch(`/api/search-donors?blood_type=${encodeURIComponent(bloodType)}&location=${encodeURIComponent(location)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const donorList = document.getElementById('donorList');
+                        const noResults = document.getElementById('noResults');
+
+                        // Clear current list
+                        donorList.innerHTML = '';
+
+                        if (data.length === 0) {
+                            noResults.style.display = 'block';
+                        } else {
+                            noResults.style.display = 'none';
+                            data.forEach(donor => {
+                                const card = document.createElement('div');
+                                card.className = 'donor-card';
+                                card.innerHTML = `
+                                    <div class="row align-items-center">
+                                        <div class="col-md-2 text-center position-relative">
+                                            <img src="${donor.profile_image}" alt="Donor" class="donor-avatar">
+                                            <div class="blood-type bg-danger" style="position: absolute; bottom: 10px; right: 10px;">${donor.blood_type || '?'}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5 class="mb-1">${donor.name}</h5>
+                                            <p class="mb-1 text-muted"><i class="fas fa-map-marker-alt text-danger me-2"></i> ${donor.location}</p>
+                                            <p class="mb-2 small"><i class="fas fa-tint text-danger me-2"></i> Last donated: ${donor.last_donation}</p>
+                                            <span class="badge bg-success">Available</span>
+                                        </div>
+                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                            <div class="donor-actions d-flex flex-column align-items-end">
+                                                ${donor.phone ? `<a href="sms:${donor.phone}?body=Hi, I am looking for blood donation." class="btn btn-outline-danger btn-sm mb-2">
+                                                    <i class="far fa-envelope me-1"></i> Message
+                                                </a>` : (donor.email ? `<button onclick="openContactModal('${donor.name}', '${donor.email}')" class="btn btn-outline-danger btn-sm mb-2">
+                                                    <i class="far fa-envelope me-1"></i> Message
+                                                </button>` : '')}
+                                                
+                                                ${donor.phone ? `
+                                                <div class="text-end">
+                                                    <div class="small text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Contact</div>
+                                                    <div class="fw-bold text-dark">${donor.phone}</div>
+                                                </div>
+                                                ` : ''}
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                                donorList.appendChild(card);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while searching for donors.');
+                    })
+                    .finally(() => {
+                        searchBtn.disabled = false;
+                        searchBtn.innerHTML = originalBtnText;
+                    });
+            });
+        }
+    });
+
+    // Modal Functions
+    function openContactModal(name, email) {
+        document.getElementById('modalDonorName').value = name;
+        document.getElementById('modalDonorEmail').value = email;
+        document.getElementById('customContactModal').style.display = 'flex';
+    }
+
+    document.querySelector('.close-modal').onclick = function () {
+        document.getElementById('customContactModal').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        const modal = document.getElementById('customContactModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function handleContactSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = 'Sending...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            alert('Message sent successfully to ' + document.getElementById('modalDonorName').value + '!');
+            document.getElementById('customContactModal').style.display = 'none';
+            btn.innerText = originalText;
+            btn.disabled = false;
+            e.target.reset();
+        }, 1500);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Donation Tips - Blood Bridge{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold text-danger">Blood Donation Tips</h1>
+                <p class="lead text-muted">Everything you need to know for a safe and successful donation.</p>
+            </div>
+
+            <!-- Before Donation -->
+            <div class="card shadow-sm mb-4 border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box bg-primary-light text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-hourglass-start fa-2x"></i>
+                        </div>
+                        <h3 class="mb-0 text-primary">Before You Donate</h3>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Hydrate Well</h5>
+                                    <p class="text-muted small">Drink plenty of water or fruit juice the night before
+                                        and morning of your donation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Eat Iron-Rich Foods</h5>
+                                    <p class="text-muted small">Eat foods like spinach, red meat, fish, poultry, beans,
+                                        and iron-fortified cereals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Get Rest</h5>
+                                    <p class="text-muted small">Ensure you get a good night's sleep before your donation
+                                        day.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Avoid Alcohol</h5>
+                                    <p class="text-muted small">Avoid drinking alcohol for 24 hours prior to donation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- During Donation -->
+            <div class="card shadow-sm mb-4 border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box bg-warning text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-hand-holding-heart fa-2x"></i>
+                        </div>
+                        <h3 class="mb-0 text-warning">During Donation</h3>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-arrow-right text-warning me-2"></i>Wear clothing with sleeves
+                            that can be raised above the elbow.</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right text-warning me-2"></i>Relax! The actual donation
+                            only takes about 10 minutes.</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right text-warning me-2"></i>Let the staff know if you
+                            have a preferred arm or vein.</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right text-warning me-2"></i>Listen to music or chat
+                            with the staff to stay relaxed.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- After Donation -->
+            <div class="card shadow-sm mb-4 border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box bg-success text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-hourglass-end fa-2x"></i>
+                        </div>
+                        <h3 class="mb-0 text-success">After You Donate</h3>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Rest & Snack</h5>
+                                    <p class="text-muted small">Rest for a few minutes and enjoy the refreshments
+                                        provided.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Drink Fluids</h5>
+                                    <p class="text-muted small">Drink extra liquids (4 cups) over the next 24 hours.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Avoid Strenuous Activity</h5>
+                                    <p class="text-muted small">Avoid heavy lifting or vigorous exercise for the rest of
+                                        the day.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+                                <div>
+                                    <h5>Keep Bandage On</h5>
+                                    <p class="text-muted small">Keep the strip bandage on for the next several hours.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('schedule_donation') }}" class="btn btn-danger btn-lg px-5 rounded-pill shadow">
+                    Ready to Donate? Schedule Now
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

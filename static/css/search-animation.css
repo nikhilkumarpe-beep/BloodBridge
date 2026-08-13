@@ -1,0 +1,66 @@
+/* Enhanced Search Box Animation for Blood Banks Page */
+.search-box {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 18px 20px 18px 55px !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 50px !important;
+    font-size: 1rem !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    background: white !important;
+}
+
+.search-box input:focus {
+    outline: none !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.2) !important;
+    transform: translateY(-2px) !important;
+    padding-left: 60px !important;
+}
+
+.search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.search-box:focus-within::before {
+    left: 23px;
+    transform: translateY(-50%) scale(1.15) rotate(15deg);
+}
+
+.search-box input::placeholder {
+    color: #999 !important;
+    transition: all 0.3s !important;
+}
+
+.search-box input:focus::placeholder {
+    color: #ccc !important;
+}
+
+/* Pulse animation on page load */
+@keyframes searchPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+    }
+}
+
+.search-box input {
+    animation: searchPulse 2s ease-in-out 1;
+}

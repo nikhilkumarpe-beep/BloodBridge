@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Blood Bridge{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-form-container">
+            <h2>Welcome Back</h2>
+            <p class="form-subtitle">Sign in to your Blood Bridge account</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    <label for="email">Email Address*</label>
+                    {{ form.email(class="form-control", placeholder="Enter your email", required=true, autofocus=true)
+                    }}
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password*</label>
+                    <div class="password-input">
+                        {{ form.password(class="form-control", placeholder="Enter your password", required=true,
+                        id="password") }}
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                    </div>
+                </div>
+
+                <div class="form-group form-check">
+                    {{ form.remember_me(class="form-check-input", id="remember_me") }}
+                    <label class="form-check-label" for="remember_me">
+                        Remember me
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <a href="#" class="btn btn-outline btn-block mb-3">
+                    <i class="fab fa-google"></i> Continue with Google
+                </a>
+                <a href="#" class="btn btn-outline btn-block">
+                    <i class="fab fa-facebook"></i> Continue with Facebook
+                </a>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="auth-image">
+            <div class="auth-image-text">
+                <h3>Why Donate Blood?</h3>
+                <ul>
+                    <li><i class="fas fa-heartbeat"></i> One donation can save up to 3 lives</li>
+                    <li><i class="fas fa-users"></i> Join a community of life-savers</li>
+                    <li><i class="fas fa-bell"></i> Get notified when you're needed most</li>
+                    <li><i class="fas fa-chart-line"></i> Track your donation impact</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function togglePassword(fieldId) {
+        const passwordField = document.getElementById(fieldId);
+        const icon = document.querySelector(`#${fieldId} + .toggle-password`);
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+    // Auto-hide flash messages after 5 seconds
+    document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function (alert) {
+                alert.style.opacity = '0';
+                setTimeout(function () {
+                    alert.style.display = 'none';
+                }, 500);
+            });
+        }, 5000);
+
+        // Close button for alerts
+        document.querySelectorAll('.alert .close').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const alert = this.closest('.alert');
+                alert.style.opacity = '0';
+                setTimeout(function () {
+                    alert.style.display = 'none';
+                }, 500);
+            });
+        });
+    });
+</script>
+{% endblock %}

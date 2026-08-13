@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Donation Certificate</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .certificate {
+            width: 800px;
+            padding: 50px;
+            background: white;
+            border: 10px solid #c0392b;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            font-size: 40px;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 20px;
+        }
+
+        .sub-header {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        .content {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: bold;
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            min-width: 300px;
+            margin: 10px 0;
+        }
+
+        .date {
+            font-weight: bold;
+        }
+
+        .signature {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+
+        .sig-line {
+            border-top: 1px solid #333;
+            width: 200px;
+            padding-top: 10px;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .certificate {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate">
+        <div class="header">Certificate of Appreciation</div>
+        <div class="sub-header">Proudly presented to</div>
+        <div class="name">{{ donor_name }}</div>
+        <div class="content">
+            <p>For your noble act of voluntarily donating blood on</p>
+            <p class="date">{{ donation_date }}</p>
+            <p>Your contribution has helped save lives. We are grateful for your generosity.</p>
+        </div>
+        <div class="signature">
+            <div class="sig-block">
+                <div class="sig-line">Blood Bridge</div>
+            </div>
+            <div class="sig-block">
+                <div class="sig-line">Medical Officer</div>
+            </div>
+        </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Download / Print</button>
+</body>
+
+</html>

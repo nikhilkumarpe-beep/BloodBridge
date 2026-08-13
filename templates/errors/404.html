@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}404 Page Not Found - Blood Bridge{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-container {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 0;
+    }
+    
+    .error-code {
+        font-size: 8rem;
+        font-weight: 800;
+        color: #e63946;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+    
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: #2b2d42;
+    }
+    
+    .error-message {
+        font-size: 1.25rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .error-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .btn-primary {
+        background-color: #e63946;
+        border-color: #e63946;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        background-color: #d62f3d;
+        border-color: #d62f3d;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+    }
+    
+    .btn-outline-primary {
+        color: #e63946;
+        border-color: #e63946;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #f8f9fa;
+        color: #d62f3d;
+        border-color: #d62f3d;
+        transform: translateY(-2px);
+    }
+    
+    .error-illustration {
+        max-width: 400px;
+        margin: 0 auto 2rem;
+    }
+    
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 6rem;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+        }
+        
+        .error-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .btn, .btn-outline-primary {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Page Not Found</h1>
+                <div class="error-message">
+                    <p>Oops! The page you're looking for doesn't exist or has been moved. Don't worry, let's get you back on track.</p>
+                </div>
+                
+                <div class="error-illustration">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+                        <path d="M400 300C511.046 300 602.5 241.046 602.5 167.5C602.5 93.9543 511.046 35 400 35C288.954 35 197.5 93.9543 197.5 167.5C197.5 241.046 288.954 300 400 300Z" fill="#F8F9FA" stroke="#E9ECEF" stroke-width="2"/>
+                        <path d="M400 200C422.091 200 440 182.091 440 160C440 137.909 422.091 120 400 120C377.909 120 360 137.909 360 160C360 182.091 377.909 200 400 200Z" fill="#E9ECEF"/>
+                        <path d="M400 220C425.405 220 446 199.405 446 174C446 148.595 425.405 128 400 128C374.595 128 354 148.595 354 174C354 199.405 374.595 220 400 220Z" fill="white"/>
+                        <path d="M394 180C394 177.791 395.791 176 398 176H402C404.209 176 406 177.791 406 180V184C406 186.209 404.209 188 402 188H398C395.791 188 394 186.209 394 184V180Z" fill="#6C757D"/>
+                        <path d="M394 190C394 187.791 395.791 186 398 186H402C404.209 186 406 187.791 406 190V192C406 194.209 404.209 196 402 196H398C395.791 196 394 194.209 394 192V190Z" fill="#6C757D"/>
+                        <path d="M350 180C350 177.791 351.791 176 354 176H358C360.209 176 362 177.791 362 180V184C362 186.209 360.209 188 358 188H354C351.791 188 350 186.209 350 184V180Z" fill="#6C757D"/>
+                        <path d="M350 190C350 187.791 351.791 186 354 186H358C360.209 186 362 187.791 362 190V192C362 194.209 360.209 196 358 196H354C351.791 196 350 194.209 350 192V190Z" fill="#6C757D"/>
+                        <path d="M438 180C438 177.791 439.791 176 442 176H446C448.209 176 450 177.791 450 180V184C450 186.209 448.209 188 446 188H442C439.791 188 438 186.209 438 184V180Z" fill="#6C757D"/>
+                        <path d="M438 190C438 187.791 439.791 186 442 186H446C448.209 186 450 187.791 450 190V192C450 194.209 448.209 196 446 196H442C439.791 196 438 194.209 438 192V190Z" fill="#6C757D"/>
+                        <path d="M400 300C400 300 370 350 300 350C230 350 200 300 200 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M400 300C400 300 430 250 500 250C570 250 600 300 600 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M400 200V220" stroke="#6C757D" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M380 210H420" stroke="#6C757D" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M200 300C200 300 170 350 100 350C30 350 0 300 0 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M600 300C600 300 630 350 700 350C770 350 800 300 800 300" stroke="#E9ECEF" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                
+                <div class="error-actions">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">
+                        <i class="fas fa-home me-2"></i> Back to Homepage
+                    </a>
+                    <a href="{{ url_for('donors') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-tint me-2"></i> Find Blood Donors
+                    </a>
+                </div>
+                
+                <div class="mt-5">
+                    <p class="text-muted mb-2">Or try one of these pages:</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="{{ url_for('about') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-info-circle me-1"></i> About Us
+                        </a>
+                        <a href="{{ url_for('inventory') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-tint me-1"></i> Blood Inventory
+                        </a>
+                        <a href="{{ url_for('request_blood') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-hand-holding-medical me-1"></i> Request Blood
+                        </a>
+                        <a href="{{ url_for('donate') }}" class="text-decoration-none text-muted hover-text-primary">
+                            <i class="fas fa-heart me-1"></i> Donate Blood
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add any custom JavaScript for the 404 page here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Example: Add animation to the error code
+        const errorCode = document.querySelector('.error-code');
+        if (errorCode) {
+            errorCode.style.opacity = '0';
+            errorCode.style.transform = 'translateY(20px)';
+            errorCode.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            // Trigger reflow
+            void errorCode.offsetWidth;
+            
+            // Animate in
+            errorCode.style.opacity = '1';
+            errorCode.style.transform = 'translateY(0)';
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,214 @@
+/* =========================================
+   SPACING FIXES - Reduce Excessive Padding
+   ========================================= */
+
+/* Fix Hero Section Spacing */
+.page-hero {
+    padding: 60px 0 40px 0 !important;
+    min-height: auto !important;
+}
+
+/* Fix Section Spacing */
+section {
+    padding: 40px 0 !important;
+}
+
+/* Specific fixes for different section types */
+section.hero {
+    padding: 80px 0 60px 0 !important;
+}
+
+section.cta {
+    padding: 50px 0 !important;
+}
+
+/* Fix Container Spacing */
+.container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Fix Stats Banner Spacing */
+.stats-banner {
+    padding: 30px 0 !important;
+    margin: 30px 0 !important;
+}
+
+/* Fix Card Spacing */
+.card {
+    margin-bottom: 20px !important;
+}
+
+/* Fix Feature Grid Spacing */
+.features-grid,
+.stats-grid,
+.impact-grid {
+    gap: 20px !important;
+    margin: 30px 0 !important;
+}
+
+/* Fix Section Title Spacing */
+.section-title {
+    margin-bottom: 30px !important;
+}
+
+.section-title h2 {
+    margin-bottom: 10px !important;
+}
+
+.section-title p {
+    margin-top: 0 !important;
+}
+
+/* Fix Blood Bank Card Spacing */
+.blood-bank-card {
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Fix Search Section Spacing */
+.search-section {
+    padding: 30px 0 !important;
+}
+
+/* Fix Form Spacing */
+.form-group {
+    margin-bottom: 20px !important;
+}
+
+/* Fix Button Spacing */
+.btn {
+    margin: 5px !important;
+}
+
+.cta-buttons {
+    gap: 15px !important;
+    margin-top: 20px !important;
+}
+
+/* Fix Header Spacing After Fixed Header */
+body {
+    padding-top: 80px !important;
+}
+
+header.scrolled~main,
+header.scrolled~section {
+    padding-top: 0 !important;
+}
+
+/* Fix Footer Spacing */
+footer {
+    padding: 40px 0 20px 0 !important;
+}
+
+.footer-content {
+    padding: 0 !important;
+}
+
+/* Fix Impact Calculator Spacing */
+.impact-calculator {
+    padding: 40px 0 !important;
+}
+
+#impactResult {
+    margin-top: 20px !important;
+}
+
+.impact-stats {
+    gap: 20px !important;
+    margin-top: 20px !important;
+}
+
+/* Fix About Page Specific Spacing */
+.mission-vision {
+    padding: 40px 0 !important;
+}
+
+.key-features {
+    padding: 40px 0 !important;
+}
+
+/* Fix Donor Card Spacing */
+.donor-card {
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Fix Dashboard Spacing */
+.dashboard-header {
+    padding: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+.dashboard-stats {
+    gap: 20px !important;
+    margin-bottom: 30px !important;
+}
+
+/* Remove Excessive Top Margins */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0 !important;
+}
+
+/* Fix List Spacing */
+ul,
+ol {
+    margin: 15px 0 !important;
+    padding-left: 20px !important;
+}
+
+li {
+    margin-bottom: 8px !important;
+}
+
+/* Fix Paragraph Spacing */
+p {
+    margin: 10px 0 !important;
+}
+
+/* Mobile Responsive Spacing */
+@media (max-width: 768px) {
+    .page-hero {
+        padding: 40px 0 30px 0 !important;
+    }
+
+    section {
+        padding: 30px 0 !important;
+    }
+
+    section.hero {
+        padding: 60px 0 40px 0 !important;
+    }
+
+    .stats-banner {
+        padding: 20px 0 !important;
+        margin: 20px 0 !important;
+    }
+
+    body {
+        padding-top: 60px !important;
+    }
+}
+
+/* Ensure No Negative Margins */
+* {
+    margin-top: 0 !important;
+}
+
+*:first-child {
+    margin-top: 0 !important;
+}
+
+/* Fix Any Remaining Large Gaps */
+.container>*:first-child {
+    margin-top: 0 !important;
+}
+
+.container>*:last-child {
+    margin-bottom: 0 !important;
+}

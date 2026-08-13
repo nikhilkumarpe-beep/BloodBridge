@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Request Blood - Blood Bridge{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0">Request Blood</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.patient_name.label(class="form-label") }}
+                                {{ form.patient_name(class="form-control") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.blood_type.label(class="form-label") }}
+                                {{ form.blood_type(class="form-select") }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.units_required.label(class="form-label") }}
+                                {{ form.units_required(class="form-control") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.required_date.label(class="form-label") }}
+                                {{ form.required_date(class="form-control", type="date") }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.hospital_name.label(class="form-label") }}
+                            {{ form.hospital_name(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.hospital_address.label(class="form-label") }}
+                            {{ form.hospital_address(class="form-control", rows=3) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.city.label(class="form-label") }}
+                            {{ form.city(class="form-control") }}
+                        </div>
+                        <h5 class="mt-4 mb-3">Contact Information</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.contact_name.label(class="form-label") }}
+                                {{ form.contact_name(class="form-control") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.contact_phone.label(class="form-label") }}
+                                {{ form.contact_phone(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.contact_email.label(class="form-label") }}
+                            {{ form.contact_email(class="form-control") }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class="btn btn-danger btn-lg") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
