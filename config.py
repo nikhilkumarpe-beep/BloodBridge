@@ -13,7 +13,7 @@ class Config:
     
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql+pymysql://root:Nikhil%40260405@localhost/blood_donation_system'
+        'mysql+pymysql://root:blood_donation_system'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Mail
