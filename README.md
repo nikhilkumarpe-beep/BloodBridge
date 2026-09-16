@@ -1,8 +1,20 @@
 # BloodBridge
 
-A Flask + MySQL web application for managing blood donors, blood requests, and blood-bank inventory in one place.
+## Overview
 
-> A practical full-stack project focused on authentication, database design, CRUD workflows, and connecting a web frontend to a Python backend.
+**BloodBridge** is a full-stack blood donation management platform built with **Python, Flask, MySQL, and JavaScript**. The application brings donor registration, blood requests, and blood-bank inventory management into a single web workflow.
+
+The project was built to explore how a real-world web application can combine **secure authentication, relational database design, CRUD operations, form validation, and backend-to-frontend integration**. It focuses on turning a practical healthcare coordination problem into a structured software system.
+
+### Core Capabilities
+
+- **Donor Management** — registration and donor information workflows
+- **Blood Requests** — create and manage requests based on blood-group requirements
+- **Inventory Management** — track blood-bank stock and availability
+- **Authentication** — protected routes, password hashing, and session-based access
+- **Database Layer** — MySQL with SQLAlchemy models and Flask-Migrate
+- **Web Application Layer** — Flask routes, Jinja2 templates, HTML, CSS, and JavaScript
+- **Application Integration** — environment-based configuration, email support, CORS, and JWT capabilities
 
 ## Highlights
 
