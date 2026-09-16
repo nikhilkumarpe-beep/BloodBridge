@@ -1,32 +1,36 @@
 # BloodBridge
 
-BloodBridge is a blood donation management web application I built using Flask and MySQL. The idea was to bring donor details, blood requests and basic blood-bank management into one place.
+A Flask + MySQL web application for managing blood donors, blood requests, and blood-bank inventory in one place.
 
-## What it does
+> A practical full-stack project focused on authentication, database design, CRUD workflows, and connecting a web frontend to a Python backend.
 
-- User signup and login
-- Donor registration and donor details
-- Create and manage blood requests
-- Store blood-group and inventory information
-- MySQL database integration using SQLAlchemy
-- Password hashing and protected routes
+## Highlights
+
+- Donor registration and donor information management
+- Blood-request creation and management
+- Blood-group and inventory tracking
+- User authentication with protected routes
+- Password hashing
+- MySQL database integration with SQLAlchemy
+- Database migrations with Flask-Migrate
 - Image upload support
 - Email configuration through environment variables
-- Database migrations with Flask-Migrate
+- CORS and JWT support for application/API integration
 
-## Built with
+## Tech Stack
 
-- Python
-- Flask
-- SQLAlchemy
-- MySQL
-- HTML / CSS / JavaScript
-- Jinja2
-- Flask-Login
-- Flask-Migrate
-- PyMySQL
+| Layer | Technologies |
+|---|---|
+| Backend | Python, Flask |
+| Database | MySQL, SQLAlchemy, PyMySQL |
+| Frontend | HTML, CSS, JavaScript, Jinja2 |
+| Authentication | Flask-Login, Flask-Bcrypt, JWT |
+| Forms & Validation | Flask-WTF, WTForms, email-validator |
+| Database Migration | Flask-Migrate |
+| Utilities | python-dotenv, requests, geopy |
+| Deployment | Gunicorn |
 
-## Project structure
+## Project Structure
 
 ```text
 BloodBridge/
@@ -36,32 +40,44 @@ BloodBridge/
 ├── app/
 │   ├── static/
 │   └── templates/
+├── .env.example
+├── .gitignore
 └── README.md
 ```
 
-## Running it locally
+## Getting Started
 
-Clone the project:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/nikhilkumarpe-beep/BloodBridge.git
 cd BloodBridge
 ```
 
-Create and activate a virtual environment:
+### 2. Create a virtual environment
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-Install the required packages:
+On macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file with your own database and application settings. For example:
+### 4. Configure environment variables
+
+Create a `.env` file using `.env.example` as the template. Keep real credentials out of Git.
+
+Example:
 
 ```env
 SECRET_KEY=your-secret-key
@@ -72,26 +88,36 @@ MAIL_PASSWORD=your-mail-password
 MAIL_DEFAULT_SENDER=your-email
 ```
 
-Then run:
+### 5. Start the application
 
 ```bash
 python app.py
 ```
 
-## A few things I learned from this project
+## What I Learned
 
-This project gave me hands-on experience with Flask routing, forms, authentication, database models, CRUD operations, MySQL and connecting a frontend to a Python backend. It also helped me understand why application credentials should be kept outside the source code.
+Building BloodBridge gave me hands-on experience with:
 
-## Things I want to improve
+- Flask application structure and routing
+- Authentication and protected routes
+- SQLAlchemy models and CRUD operations
+- MySQL database integration
+- Form handling and validation
+- Environment-based configuration
+- Database migrations
+- Connecting frontend interfaces to a Python backend
 
-- Add proper automated tests
-- Improve the API structure
-- Add better role-based dashboards
-- Containerize the application
-- Deploy it with proper logging and monitoring
+## Future Improvements
+
+- Add automated unit and integration tests
+- Introduce a cleaner REST API structure
+- Add role-based dashboards for different users
+- Improve search and donor-matching workflows
+- Containerize the application with Docker
+- Add CI/CD and production monitoring
+- Deploy the application with production-ready configuration
 
 ## Author
 
-Nikhil Kumar PE
-
+**Nikhil Kumar PE**  
 Computer Science Engineering student | Python | Web Development | AI/ML
