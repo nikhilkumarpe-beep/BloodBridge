@@ -12,6 +12,7 @@ __pycache__/
 venv/
 env/
 .venv/
+*.egg-info/
 
 # Flask
 instance/
