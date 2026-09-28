@@ -1,26 +1,21 @@
 # BloodBridge
 
-A full-stack blood donation management platform designed to connect donors, blood requests, and blood-bank inventory through a structured web application.
+A full-stack blood donation management platform that demonstrates practical backend engineering, relational database design, authentication, validation, and frontend integration.
 
-> **Built with:** Python · Flask · MySQL · SQLAlchemy · JavaScript
+**Stack:** Python · Flask · MySQL · SQLAlchemy · JavaScript
 
-## Overview
+## What it demonstrates
 
-BloodBridge is a practical web application built around a real-world healthcare coordination workflow. It provides a centralized system for donor registration, blood-request management, and inventory tracking while demonstrating backend development, relational database design, authentication, validation, and frontend-backend integration.
-
-The project focuses on building a maintainable application: configuration is environment-based, database access is modeled through SQLAlchemy, migrations are supported through Flask-Migrate, and authenticated routes protect application workflows.
-
-## Key Features
-
-- **Donor Management** — registration and donor information workflows
-- **Blood Requests** — create and manage requests based on blood-group requirements
-- **Inventory Management** — track blood-group stock and availability
-- **Authentication** — session-based authentication, protected routes, and password hashing
-- **Database Integration** — MySQL with SQLAlchemy and PyMySQL
-- **Validation** — Flask-WTF, WTForms, and email validation
-- **Migrations** — database schema management with Flask-Migrate
-- **Application Services** — email configuration, image uploads, CORS, and JWT support
-- **Environment Configuration** — secrets and deployment configuration kept outside source code
+- Donor registration and management workflows
+- Blood-request creation and tracking
+- Blood-bank inventory management
+- Authentication and protected routes
+- Password hashing and session management
+- Server-side form validation
+- SQLAlchemy ORM with MySQL
+- Database migrations with Flask-Migrate
+- Environment-based configuration
+- Email, upload, CORS, and JWT integrations
 
 ## Architecture
 
@@ -31,23 +26,22 @@ Browser
 HTML / CSS / JavaScript / Jinja2
    │
    ▼
-Flask Application
-   │
-   ├── Authentication & Authorization
-   ├── Form Validation
-   ├── Business Logic
-   └── Application Routes
+Flask application
+   ├── Authentication
+   ├── Validation
+   ├── Business logic
+   └── Application routes
    │
    ▼
 SQLAlchemy ORM
    │
    ▼
-MySQL Database
+MySQL
 ```
 
-## Tech Stack
+## Tech stack
 
-| Area | Technologies |
+| Layer | Technologies |
 |---|---|
 | Language | Python, JavaScript |
 | Backend | Flask |
@@ -59,7 +53,7 @@ MySQL Database
 | Utilities | python-dotenv, requests, geopy |
 | Server | Gunicorn |
 
-## Project Structure
+## Project structure
 
 ```text
 BloodBridge/
@@ -74,7 +68,7 @@ BloodBridge/
 └── README.md
 ```
 
-## Getting Started
+## Run locally
 
 ### 1. Clone
 
@@ -86,19 +80,19 @@ cd BloodBridge
 ### 2. Create a virtual environment
 
 ```bash
-python -m venv venv
+python -m venv .venv
 ```
 
 Windows:
 
-```bash
-venv\Scripts\activate
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
 macOS/Linux:
 
 ```bash
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
 ### 3. Install dependencies
@@ -107,58 +101,52 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Configure environment variables
+### 4. Configure the environment
 
-Create `.env` from `.env.example` and provide your local configuration. Never commit real credentials.
+Copy `.env.example` to `.env` and provide your local MySQL and mail configuration.
 
-```env
-SECRET_KEY=your-secret-key
-JWT_SECRET_KEY=your-jwt-secret
-DATABASE_URL=mysql+pymysql://username:password@localhost/blood_donation_system
-MAIL_USERNAME=your-email
-MAIL_PASSWORD=your-mail-password
-MAIL_DEFAULT_SENDER=your-email
-```
+Never commit real credentials.
 
-### 5. Run
+### 5. Start the application
 
 ```bash
 python app.py
 ```
 
-## Engineering Concepts Demonstrated
+The application expects a configured MySQL database. Database migration commands can be used when the migration environment is initialized.
 
-- Flask application structure and routing
-- Authentication and protected routes
-- CRUD operations and relational data modeling
-- SQLAlchemy ORM and MySQL integration
-- Form handling and server-side validation
-- Password hashing and session management
-- Database migrations
-- Environment-based configuration
+## Engineering highlights
+
+- CRUD-oriented application workflows
+- Relational data modelling
+- ORM-based database access
+- Authentication and authorization
+- Server-side validation
+- Secure password storage
+- Environment-based secrets
 - Frontend/backend integration
-- API-oriented capabilities with JWT and CORS
+- Production-oriented deployment configuration
 
-## Security Notes
+## Security
 
-- Secrets are loaded through environment variables rather than hard-coded credentials.
+- Secrets are loaded from environment variables.
 - Passwords are hashed before storage.
-- `.env` files should remain local and must not be committed.
-- Production deployments should use HTTPS, secure cookie settings, strong secret keys, and a production database configuration.
+- `.env` files are excluded from version control.
+- Upload size and file-extension controls are implemented.
+- Production deployments should use HTTPS, secure cookie settings, strong secrets, and a managed database.
 
 ## Roadmap
 
-- Add automated unit and integration tests
-- Introduce a cleaner REST API layer
-- Add role-based dashboards
-- Improve donor matching and search workflows
-- Containerize with Docker
-- Add CI/CD with GitHub Actions
-- Deploy with production-ready monitoring and logging
+- Automated unit and integration tests
+- Role-based dashboards
+- Improved donor matching
+- Docker-based development
+- GitHub Actions CI
+- Production monitoring and logging
 
 ## Author
 
 **Nikhil Kumar PE**  
-Computer Science Engineering Student · Python · Web Development · AI/ML
+Computer Science Engineering · Python · Backend Development · AI/ML
 
 [GitHub](https://github.com/nikhilkumarpe-beep)
