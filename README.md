@@ -57,7 +57,8 @@ MySQL
 
 ```text
 BloodBridge/
-├── app.py
+├── run.py
+├── app.py                 # Legacy entry point; use run.py
 ├── config.py
 ├── requirements.txt
 ├── app/
@@ -110,10 +111,10 @@ Never commit real credentials.
 ### 5. Start the application
 
 ```bash
-python app.py
+python run.py
 ```
 
-The application expects a configured MySQL database. Database migration commands can be used when the migration environment is initialized.
+The application factory is exposed by `run.py`. The project expects a configured MySQL database; create the database first and configure `DATABASE_URL` in `.env`. Use `python run.py` for local development. Do not expose Flask's debug server to the public internet.
 
 ## Engineering highlights
 
